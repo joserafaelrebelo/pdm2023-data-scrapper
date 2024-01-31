@@ -13,18 +13,17 @@ def scrap_data(apps_ids):
     # Removed tqdm for clarity, assuming direct iteration
     for ap in apps_ids:
         for score in range(1, 6):
-            for sort_order in [Sort.MOST_RELEVANT, Sort.NEWEST]:
-                rvs, _ = reviews(
-                    ap,
-                    lang='pt',
-                    country='br',
-                    sort=Sort.NEWEST,
-                    filter_score_with=score
-                )
-                for r in rvs:
-                    r['sortOrder'] = 'newest'
-                    r['appId'] = ap
-                app_reviews.extend(rvs)
+            rvs, _ = reviews(
+                ap,
+                lang='pt',
+                country='br',
+                sort=Sort.NEWEST,
+                filter_score_with=score
+            )
+            for r in rvs:
+                r['sortOrder'] = 'newest'
+                r['appId'] = ap
+            app_reviews.extend(rvs)
 
     return app_reviews
 
